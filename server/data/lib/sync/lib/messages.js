@@ -45,13 +45,8 @@ const fetchPage = (web, channel, teamId, getters, params) => {
   return Promise.fromCallback(cb => {
       web
         .channels
-        .history(channel.id, params,(err, result) => {
-          if (err) {
-            return cb(err);
-          }
-          if (result.ok === false) {
-            return cb(new Error(result.error));
-          }
+        .history(channel.id, params)
+        .then((result) => {
           let promises = result.messages.map(message => {
             return getMessageById(message.ts)
               .then(ch => {
@@ -72,6 +67,9 @@ const fetchPage = (web, channel, teamId, getters, params) => {
               });
           });
           return Promise.all(promises).then(() => cb(null, result)).catch(cb);
+        })
+        .catch((err) => {
+          return cb(new Error(err));
         });
     });
 }

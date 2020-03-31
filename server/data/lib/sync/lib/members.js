@@ -31,13 +31,8 @@ export default (token, teamId, getters) => {
       logger.info('Started syncing users');
       web
         .users
-        .list({}, (err, result) => {
-          if (err) {
-            return cb(err);
-          }
-          if (result.ok === false) {
-            return cb(new Error(result.error));
-          }
+        .list({})
+        .then((result) => {
           let promises = result
             .members
               .filter(member => member.deleted === false)

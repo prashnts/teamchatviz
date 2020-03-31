@@ -33,13 +33,8 @@ export default (token, teamId, getters) => {
       logger.info('Started syncing emojis');
       web
         .emoji
-        .list((err, result) => {
-          if (err) {
-            return cb(err);
-          }
-          if (result.ok === false) {
-            return cb(new Error(result.error));
-          }
+        .list()
+        .then((result) => {
           return deleteAll(teamId).then(() => {
             let emojis = Object.keys(result.emoji);
             let promises = emojis.map(name => {

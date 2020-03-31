@@ -33,16 +33,8 @@ export default (token, teamId, getters) => {
       logger.info('Started syncing channels');
       web
         .channels
-        .list({
-          exclude_archived: true,
-        },
-        (err, result) => {
-          if (err) {
-            return cb(err);
-          }
-          if (result.ok === false) {
-            return cb(new Error(result.error));
-          }
+        .list({ exclude_archived: true })
+        .then((result) => {
           let promises = result.channels.map(channel => {
             return getChannelById(channel.id)
               .then(ch => {
@@ -61,6 +53,7 @@ export default (token, teamId, getters) => {
               });
           });
           return Promise.all(promises).then(() => cb(null, result.channels)).catch(err => cb(err));
-        });
+        })
+        .catch((err) => cb(err));
     });
 }
