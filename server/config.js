@@ -21,16 +21,16 @@
 import logger from 'winston';
 
 logger.emitErrs = true;
-logger.level = process.env.LOG_LEVEL || 'info';
+// logger.level = process.env.LOG_LEVEL || 'debug';
 
 const cfg = {
   slackClientId: process.env.SLACK_CLIENT_ID || null,
   slackClientSecret: process.env.SLACK_CLIENT_SECRET || null,
   dbUrl: process.env.DATABASE_URL || null,
-  anonymize: process.env.ANONYMIZE === 'true',
-  public: process.env.PUBLIC === 'true',
-  logQueries: process.env.LOG_QUERIES === 'true',
-  logLevel: logger.level,
+  anonymize: false,
+  public: false,
+  logQueries: true,
+  logLevel: 'DEBUG',
   viz: {
     tSNEIterations: process.env.VIZ_TSNE_ITERATION || 500,
   },
