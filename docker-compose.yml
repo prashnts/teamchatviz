@@ -1,0 +1,35 @@
+# Author Xqua In The Moon
+
+version: '3'
+services:
+
+  postgres:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: teamchatviz
+      POSTGRES_USER: ${POSTGRES_USER}
+      PGDATA: /tmp
+
+  teamchatviz:
+    #will build the image with the rails server launch command
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    image: teamchatviz
+    # volumes:
+      # - ./Jogl-Backend:/myapp/backend
+    depends_on:
+      - postgres
+    environment:
+      PORT: 3333
+      SLACK_CLIENT_ID: ${SLACK_CLIENT_ID}
+      SLACK_CLIENT_SECRET: ${SLACK_CLIENT_SECRET}
+      DATABASE_URL: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/teamchatviz"
+      PUBLIC: ${PUBLIC}
+      ANONYMIZE: ${ANONYMIZE}
+      SESSION_SECRET: ${SESSION_SECRET}
+    ports:
+      - 3333:3333
