@@ -1,6 +1,6 @@
 {
   "name": "teamchatviz",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Slack Data Vizualization App",
   "repository": "https://github.com/moovel/teamchatviz",
   "main": "index.js",
@@ -109,6 +109,6 @@
     }
   },
   "engines": {
-    "node": "4.x"
+    "node": "11.x"
   }
 }
