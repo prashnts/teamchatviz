@@ -1,4 +1,9 @@
-# ⚠️⚠️⚠️ DEPRECATED: The new home is now [here](https://github.com/move-lab/teamchatviz)
+> RESURRECTED!
+> Move Lab made this amazing slack vizualisation tool which was no longer available.
+> We have taken their repo and resurrected it here.
+> 
+> A preview is available for demos on https://tcviz-git.herokuapp.com/ ; please note that
+> it is not secured, and it crashes! 
 
 &#35;teamchatviz
 ==============

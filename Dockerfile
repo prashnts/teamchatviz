@@ -28,4 +28,4 @@ COPY . /app
 EXPOSE 3333
 
 # Starting the node stack
-CMD npm run up && npm run start
+CMD npm run up && npm run serve
